@@ -1,2 +1,2 @@
 # hades.github.io
-Canvas - 123
+Ceci est un test
