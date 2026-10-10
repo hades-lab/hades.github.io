@@ -1,142 +1,446 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Massage Rinnovati</title>
-  <style>
-    body {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      background: linear-gradient(to bottom right, #fdcfe1 60%, #edade0 100%);
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      background: rgba(255,255,255,0.75);
-      border-radius: 20px;
-      box-shadow: 0 6px 24px rgba(187, 140, 189, 0.16);
-      padding: 30px 40px;
-      position: relative;
-    }
-    .titre {
-      font-size: 44px;
-      color: #377cf9;
-      font-weight: bold;
-      letter-spacing: 2px;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .rabais {
-      font-size: 21px;
-      margin-bottom: 18px;
-      color: #695252;
-      font-weight: 600;
-    }
-    .services {
-      margin: 22px 0;
-      font-size: 18px;
-      color: #4b3621;
-      line-height: 1.7;
-    }
-    .services h3 {
-      font-weight: 500;
-      font-size: 20px;
-      margin-bottom: 9px;
-    }
-    .img-group {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 8px;
-    }
-    .img-large {
-      width: 45%;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 8px solid #c1adc6;
-      box-shadow: 0 1px 8px rgba(61, 53, 111, 0.09);
-    }
-    .img-small {
-      width: 28%;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid #e9d1f3;
-      box-shadow: 0 1px 8px rgba(61, 53, 111, 0.09);
-    }
-    .img-coin {
-      position: absolute;
-      top: -55px;
-      right: -65px;
-      width: 270px;
-      border-radius: 0 0 75px 0;
-      z-index: 1;
-    }
-    .commander {
-      font-size: 19px;
-      margin-top: 34px;
-      color: #313030;
-      font-weight: 500;
-    }
-    .coordonnees {
-      margin: 5px 0 25px 0;
-      color: #403b3b;
-      font-size: 17px;
-      line-height: 1.5;
-    }
-    @media (max-width: 700px) {
-      .container {
-        padding: 15px 5px;
-        max-width: 99%;
-      }
-      .img-coin {
-        width: 140px;
-        top: -25px;
-        right: -20px;
-      }
-      .img-large, .img-small {
-        width: 45vw;
-        min-width: 35vw;
-        max-width: 70vw;
-      }
-      .img-group {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Mystique - Cartomancie Interactive</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for mystical typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cinzel: ['"Cinzel Decorative"', 'serif'],
+                        garamond: ['"EB Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        mystic: {
+                            950: '#0a0314',
+                            900: '#15092a',
+                            800: '#231245',
+                            700: '#381c6b',
+                            gold: '#f3d58d',
+                            lightGold: '#ffeeb3',
+                            accent: '#9d4edd',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0314;
+            color: #e2d9f3;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .mystic-glow {
+            text-shadow: 0 0 15px rgba(243, 213, 141, 0.6), 0 0 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .box-glow {
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.25), inset 0 0 15px rgba(243, 213, 141, 0.1);
+        }
+
+        /* 3D Card Flip Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        .card-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Floating animation for medium & crystal ball */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(243, 213, 141, 0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(243, 213, 141, 0.9)); }
+        }
+
+        .crystal-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #15092a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #381c6b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9d4edd;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <img src="coin.jpg" class="img-coin" alt="Massage décoratif" />
-    <div class="titre">MASSAGE<br>RINNOVATI</div>
-    <div class="rabais">RABAIS AUTOMNE 15%</div>
-    <div class="services">
-      <h3>NOS SERVICES</h3>
-      <hr style="border: none; border-top: 1px solid #3e2d24; width: 170px; margin-left: 0;">
-      <ul>
-        <li>Massage table</li>
-        <li>Massage chaise</li>
-        <li>Masque visage</li>
-      </ul>
-    </div>
-    <div class="img-group">
-      <img src="main-visage.png" class="img-large" alt="Massage visage">
-      <img src="main-table.png" class="img-small" alt="Massage table">
-      <img src="main-dos.png" class="img-small" alt="Massage dos">
-    </div>
-    <div class="commander">COMMANDER</div>
-    <div class="coordonnees">
-      +123-456-7890<br>
-      www.reallygreatsite.com<br>
-      123 Anywhere St., Any City
-    </div>
-  </div>
+<body class="min-h-full flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-mystic-800 via-mystic-950 to-black">
+
+    <header class="py-6 px-4 text-center relative border-b border-mystic-700/40 backdrop-blur-md bg-mystic-950/60 sticky top-0 z-50">
+        <div class="absolute inset-0 bg-[url('https://placehold.co/1200x100/15092a/15092a?text=')] opacity-25 pointer-events-none"></div>
+        <h1 class="font-cinzel text-3xl md:text-4xl text-mystic-gold mystic-glow tracking-wider mb-1">Oracle Mystique</h1>
+        <p class="font-garamond italic text-mystic-lightGold/80 text-lg">Voyance & Consultation des Arcanes Divinatoires</p>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl flex flex-col gap-8">
+
+        <!-- Medium & Crystal Ball Section -->
+        <section class="flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-mystic-900/90 to-mystic-950/90 border border-mystic-700/60 rounded-2xl p-6 md:p-8 box-glow relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-mystic-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6 z-10 text-center md:text-left">
+                <!-- SVG Stylized Medium Illustration -->
+                <div class="relative w-36 h-36 md:w-44 md:h-44 flex-shrink-0 animate-float">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-[0_0_15px_rgba(157,78,221,0.4)]" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hood / Cloak Background -->
+                        <path d="M100 20 C60 20 35 50 35 90 C35 130 50 160 70 180 C80 190 90 195 100 195 C110 195 120 190 130 180 C150 160 165 130 165 90 C165 50 140 20 100 20 Z" fill="#15092a" stroke="#f3d58d" stroke-width="2"/>
+                        <!-- Inner Face Shadow -->
+                        <path d="M100 45 C75 45 65 65 65 95 C65 130 80 155 100 160 C120 155 135 130 135 95 C135 65 125 45 100 45 Z" fill="#0a0314"/>
+                        <!-- Mysterious Glowing Eyes -->
+                        <ellipse cx="85" cy="85" rx="5" ry="3" fill="#f3d58d" class="crystal-glow"/>
+                        <ellipse cx="115" cy="85" rx="5" ry="3" fill="#f3d58d" class="crystal-glow"/>
+                        <!-- Veil/Hood Details -->
+                        <path d="M50 70 C70 50 130 50 150 70 C160 90 155 140 130 170 C120 150 110 135 100 135 C90 135 80 150 70 170 C45 140 40 90 50 70 Z" fill="#231245" opacity="0.8"/>
+                        <!-- Crystal Ball Hands & Orb -->
+                        <circle cx="100" cy="130" r="28" fill="url(#crystalGrad)" class="crystal-glow" stroke="#f3d58d" stroke-width="1.5"/>
+                        <circle cx="92" cy="120" r="8" fill="#ffffff" opacity="0.4" filter="blur(2px)"/>
+                        <!-- Gradient Definitions -->
+                        <defs>
+                            <radialGradient id="crystalGrad" cx="30%" cy="30%" r="70%">
+                                <stop offset="0%" stop-color="#ffeeb3"/>
+                                <stop offset="40%" stop-color="#9d4edd"/>
+                                <stop offset="100%" stop-color="#231245"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <span class="text-xs uppercase tracking-widest text-mystic-gold font-semibold">Le Guide des Arcanes</span>
+                    <h2 class="font-cinzel text-xl md:text-2xl text-white">Maître Ignis</h2>
+                    <p id="medium-message" class="font-garamond italic text-mystic-lightGold/90 text-base md:text-lg max-w-xl">
+                        "Pose ta question en ton âme et conscience. Les voiles du temps vont s'ouvrir pour révéler ton passé, ton présent et ton avenir..."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-mystic-900/60 border border-mystic-700/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm box-glow">
+            <h3 class="font-cinzel text-lg text-mystic-gold mb-3 flex items-center gap-2">
+                <span class="text-mystic-accent">✦</span> Quelle est votre interrogation ?
+            </h3>
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" id="user-question" placeholder="Ex: Quel tournant va prendre ma vie professionnelle ces prochains mois ?" 
+                    class="flex-grow bg-mystic-950/80 border border-mystic-700 rounded-xl px-4 py-3 text-mystic-lightGold placeholder-mystic-lightGold/40 focus:outline-none focus:border-mystic-gold transition-all font-sans text-sm md:text-base">
+                <button id="draw-btn" onclick="startReading()" 
+                    class="bg-gradient-to-r from-mystic-700 to-mystic-accent hover:from-mystic-accent hover:to-mystic-700 text-mystic-gold font-cinzel tracking-wider px-6 py-3 rounded-xl border border-mystic-gold/40 shadow-lg hover:shadow-mystic-accent/30 transition-all duration-300 font-semibold cursor-pointer flex items-center justify-center gap-2">
+                    <span>Tirer les Cartes</span>
+                    <span>✨</span>
+                </button>
+            </div>
+            <!-- Quick preset questions -->
+            <div class="flex flex-wrap gap-2 mt-4 items-center">
+                <span class="text-xs text-mystic-lightGold/60 font-garamond italic">Suggestions :</span>
+                <button onclick="setQuestion('Quelles énergies marquent mon avenir amoureux ?')" class="text-xs bg-mystic-800/80 hover:bg-mystic-700 text-mystic-lightGold/80 px-3 py-1 rounded-full border border-mystic-700 transition-all">Amour 💖</button>
+                <button onclick="setQuestion('Vers quel succès professionnel m\'oriente-t-on ?')" class="text-xs bg-mystic-800/80 hover:bg-mystic-700 text-mystic-lightGold/80 px-3 py-1 rounded-full border border-mystic-700 transition-all">Carrière 💼</button>
+                <button onclick="setQuestion('Quel est le conseil spirituel du moment pour moi ?')" class="text-xs bg-mystic-800/80 hover:bg-mystic-700 text-mystic-lightGold/80 px-3 py-1 rounded-full border border-mystic-700 transition-all">Spiritualité 🔮</button>
+            </div>
+        </section>
+
+        <section id="spread-section" class="flex flex-col items-center gap-6 my-4">
+            <div class="text-center">
+                <h3 id="spread-title" class="font-cinzel text-xl text-mystic-gold tracking-wide">Tirage en Croix (Passé • Présent • Futur)</h3>
+                <p id="spread-subtitle" class="text-xs text-mystic-lightGold/70 font-garamond italic mt-1">Sélectionnez vos 3 cartes mystiques</p>
+            </div>
+
+            <!-- Cards Container -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl perspective-1000">
+                
+                <!-- Card 1: Passé -->
+                <div class="flex flex-col items-center gap-3">
+                    <span class="font-cinzel text-xs uppercase tracking-widest text-mystic-gold">1. Le Passé</span>
+                    <div class="relative w-52 h-80 cursor-pointer group" onclick="flipCard(0)">
+                        <div id="card-inner-0" class="w-full h-full transform-style-3d relative rounded-2xl shadow-2xl">
+                            <!-- Card Back -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-mystic-800 via-mystic-900 to-mystic-950 border-2 border-mystic-gold/60 rounded-2xl p-4 flex flex-col justify-between items-center group-hover:border-mystic-gold transition-colors">
+                                <div class="w-full h-full border border-mystic-gold/20 rounded-xl flex flex-col justify-center items-center p-2 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-mystic-800 to-mystic-950">
+                                    <div class="absolute inset-2 border border-dashed border-mystic-gold/30 rounded-lg pointer-events-none"></div>
+                                    <span class="text-3xl text-mystic-gold mb-2">👁️</span>
+                                    <span class="font-cinzel text-xs text-mystic-gold text-center tracking-widest">ORACLE</span>
+                                </div>
+                            </div>
+                            <!-- Card Front -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gradient-to-b from-mystic-900 to-mystic-950 border-2 border-mystic-gold rounded-2xl p-4 flex flex-col justify-between items-center shadow-[0_0_20px_rgba(243,213,141,0.2)]">
+                                <div class="w-full flex justify-between items-center text-xs text-mystic-gold font-cinzel">
+                                    <span id="card-num-0">I</span>
+                                    <span id="card-symbol-0">✦</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center my-auto">
+                                    <div id="card-icon-0" class="text-4xl mb-3 text-mystic-gold">🌙</div>
+                                    <h4 id="card-name-0" class="font-cinzel text-sm text-mystic-gold font-bold mb-1">Nom de la Carte</h4>
+                                    <span id="card-tag-0" class="text-[10px] uppercase tracking-wider text-mystic-accent bg-mystic-950/80 px-2 py-0.5 rounded border border-mystic-accent/30">Orientation</span>
+                                </div>
+                                <div class="w-full text-center text-[10px] text-mystic-lightGold/60 font-garamond italic">Arcane Majeur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Présent -->
+                <div class="flex flex-col items-center gap-3">
+                    <span class="font-cinzel text-xs uppercase tracking-widest text-mystic-gold">2. Le Présent</span>
+                    <div class="relative w-52 h-80 cursor-pointer group" onclick="flipCard(1)">
+                        <div id="card-inner-1" class="w-full h-full transform-style-3d relative rounded-2xl shadow-2xl">
+                            <!-- Card Back -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-mystic-800 via-mystic-900 to-mystic-950 border-2 border-mystic-gold/60 rounded-2xl p-4 flex flex-col justify-between items-center group-hover:border-mystic-gold transition-colors">
+                                <div class="w-full h-full border border-mystic-gold/20 rounded-xl flex flex-col justify-center items-center p-2 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-mystic-800 to-mystic-950">
+                                    <div class="absolute inset-2 border border-dashed border-mystic-gold/30 rounded-lg pointer-events-none"></div>
+                                    <span class="text-3xl text-mystic-gold mb-2">👁️</span>
+                                    <span class="font-cinzel text-xs text-mystic-gold text-center tracking-widest">ORACLE</span>
+                                </div>
+                            </div>
+                            <!-- Card Front -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gradient-to-b from-mystic-900 to-mystic-950 border-2 border-mystic-gold rounded-2xl p-4 flex flex-col justify-between items-center shadow-[0_0_20px_rgba(243,213,141,0.2)]">
+                                <div class="w-full flex justify-between items-center text-xs text-mystic-gold font-cinzel">
+                                    <span id="card-num-1">II</span>
+                                    <span id="card-symbol-1">✦</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center my-auto">
+                                    <div id="card-icon-1" class="text-4xl mb-3 text-mystic-gold">☀️</div>
+                                    <h4 id="card-name-1" class="font-cinzel text-sm text-mystic-gold font-bold mb-1">Nom de la Carte</h4>
+                                    <span id="card-tag-1" class="text-[10px] uppercase tracking-wider text-mystic-accent bg-mystic-950/80 px-2 py-0.5 rounded border border-mystic-accent/30">Orientation</span>
+                                </div>
+                                <div class="w-full text-center text-[10px] text-mystic-lightGold/60 font-garamond italic">Arcane Majeur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Futur -->
+                <div class="flex flex-col items-center gap-3">
+                    <span class="font-cinzel text-xs uppercase tracking-widest text-mystic-gold">3. Le Futur</span>
+                    <div class="relative w-52 h-80 cursor-pointer group" onclick="flipCard(2)">
+                        <div id="card-inner-2" class="w-full h-full transform-style-3d relative rounded-2xl shadow-2xl">
+                            <!-- Card Back -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-mystic-800 via-mystic-900 to-mystic-950 border-2 border-mystic-gold/60 rounded-2xl p-4 flex flex-col justify-between items-center group-hover:border-mystic-gold transition-colors">
+                                <div class="w-full h-full border border-mystic-gold/20 rounded-xl flex flex-col justify-center items-center p-2 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-mystic-800 to-mystic-950">
+                                    <div class="absolute inset-2 border border-dashed border-mystic-gold/30 rounded-lg pointer-events-none"></div>
+                                    <span class="text-3xl text-mystic-gold mb-2">👁️</span>
+                                    <span class="font-cinzel text-xs text-mystic-gold text-center tracking-widest">ORACLE</span>
+                                </div>
+                            </div>
+                            <!-- Card Front -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gradient-to-b from-mystic-900 to-mystic-950 border-2 border-mystic-gold rounded-2xl p-4 flex flex-col justify-between items-center shadow-[0_0_20px_rgba(243,213,141,0.2)]">
+                                <div class="w-full flex justify-between items-center text-xs text-mystic-gold font-cinzel">
+                                    <span id="card-num-2">III</span>
+                                    <span id="card-symbol-2">✦</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center my-auto">
+                                    <div id="card-icon-2" class="text-4xl mb-3 text-mystic-gold">⭐</div>
+                                    <h4 id="card-name-2" class="font-cinzel text-sm text-mystic-gold font-bold mb-1">Nom de la Carte</h4>
+                                    <span id="card-tag-2" class="text-[10px] uppercase tracking-wider text-mystic-accent bg-mystic-950/80 px-2 py-0.5 rounded border border-mystic-accent/30">Orientation</span>
+                                </div>
+                                <div class="w-full text-center text-[10px] text-mystic-lightGold/60 font-garamond italic">Arcane Majeur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="flip-hint" class="text-center text-xs text-mystic-gold animate-pulse font-garamond italic hidden">
+                Cliquez sur chaque carte pour la révéler et consulter la prophétie complète...
+            </div>
+        </section>
+
+        <section id="interpretation-section" class="hidden bg-gradient-to-br from-mystic-900 via-mystic-950 to-black border-2 border-mystic-gold/50 rounded-2xl p-6 md:p-8 box-glow transition-all duration-700">
+            <div class="flex items-center justify-between border-b border-mystic-700/60 pb-4 mb-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-mystic-accent font-semibold">Oracle & Prophétie</span>
+                    <h3 class="font-cinzel text-xl md:text-2xl text-mystic-gold mt-1">Interprétation des Arcanes</h3>
+                </div>
+                <span class="text-2xl">🔮</span>
+            </div>
+
+            <!-- Question recap -->
+            <div class="bg-mystic-950/80 border border-mystic-700/40 rounded-xl p-4 mb-6">
+                <span class="text-xs text-mystic-lightGold/60 font-garamond italic block mb-1">Question posée :</span>
+                <p id="recap-question" class="text-mystic-lightGold font-medium text-sm md:text-base"></p>
+            </div>
+
+            <!-- Detailed Analysis text -->
+            <div class="space-y-4 font-garamond text-lg leading-relaxed text-mystic-lightGold/90">
+                <div class="p-4 bg-mystic-900/40 rounded-xl border-l-2 border-mystic-gold">
+                    <h4 class="font-cinzel text-sm text-mystic-gold uppercase tracking-wider mb-2">1. Fondement (Le Passé)</h4>
+                    <p id="analysis-past">...</p>
+                </div>
+                <div class="p-4 bg-mystic-900/40 rounded-xl border-l-2 border-mystic-accent">
+                    <h4 class="font-cinzel text-sm text-mystic-gold uppercase tracking-wider mb-2">2. Énergies Actuelles (Le Présent)</h4>
+                    <p id="analysis-present">...</p>
+                </div>
+                <div class="p-4 bg-mystic-900/40 rounded-xl border-l-2 border-mystic-gold">
+                    <h4 class="font-cinzel text-sm text-mystic-gold uppercase tracking-wider mb-2">3. Destination & Verdict (Le Futur)</h4>
+                    <p id="analysis-future">...</p>
+                </div>
+                <div class="p-5 bg-mystic-800/50 rounded-xl border border-mystic-gold/40 mt-6 shadow-inner">
+                    <h4 class="font-cinzel text-base text-mystic-gold uppercase tracking-wider mb-2 text-center">🌟 Message du Médium</h4>
+                    <p id="analysis-synth" class="text-center italic text-mystic-lightGold">...</p>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="resetReading()" class="bg-mystic-800 hover:bg-mystic-700 text-mystic-gold border border-mystic-gold/40 px-6 py-2.5 rounded-xl font-cinzel text-sm tracking-wider transition-all">
+                    Poser une autre question
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-6 text-center text-xs text-mystic-lightGold/50 font-garamond border-t border-mystic-700/30 mt-auto">
+        <p>© Oracle Mystique — Cabinet de Cartomancie & Divination Interactive.</p>
+    </footer>
+
+    <script>
+        // Database of Tarot / Oracle Cards
+        const tarotCards = [
+            { name: "Le Bateleur", num: "I", symbol: "🪄", icon: "✨", meaningPast: "Un nouveau départ a été amorcé avec talent et potentiel, bien que manquant parfois de maturité.", meaningPresent: "Vos compétences et votre créativité sont au centre de l'action. C'est le moment d'entreprendre.", meaningFuture: "Une opportunité concrète se présentera pour manifester vos ambitions les plus chères." },
+            { name: "La Papesse", num: "II", symbol: "📜", icon: "🌙", meaningPast: "La réflexion, l'intuition et la patience ont forgé votre sagesse en silence.", meaningPresent: "Le moment est venu d'observer, d'écouter votre voix intérieure et de garder certains projets secrets.", meaningFuture: "La vérité finira par éclater au grand jour, révélant des connaissances cachées." },
+            { name: "L'Impératrice", num: "III", symbol: "👑", icon: "🌸", meaningPast: "Abondance, fertilité et épanouissement relationnel ont marqué vos récentes étapes.", meaningPresent: "La créativité, l'harmonie et la diplomatie vous ouvrent des portes lumineuses.", meaningFuture: "Un projet fructueux va s'épanouir avec éclat et générer de belles satisfactions." },
+            { name: "L'Empereur", num: "IV", symbol: "🏛️", icon: "⚡", meaningPast: "Structure, rigueur et construction méthodique ont posé de solides fondations.", meaningPresent: "Vous devez faire preuve d'autorité, de stabilité et de sens des responsabilités.", meaningFuture: "La réussite matérielle et l'établissement d'un ordre pérenne couronneront vos efforts." },
+            { name: "L'Amoureux", num: "VI", symbol: "❤️", icon: "🕊️", meaningPast: "Un choix crucial ou une union profonde a redéfini vos priorités de cœur.", meaningPresent: "Vous vous trouvez à un carrefour relationnel ou décisionnel demandant de suivre votre boussole intérieure.", meaningFuture: "Une harmonie retrouvée ou une alliance fructueuse scellera votre décision." },
+            { name: "L'Ermite", num: "IX", symbol: "🏮", icon: "🏔️", meaningPast: "Une période d'introspection, de solitude nécessaire et de quête de sens.", meaningPresent: "Prenez du recul face au tumulte extérieur. La lumière est en vous.", meaningFuture: "Une illumination progressive dissipera les doutes et guidera vos pas vers la sagesse." },
+            { name: "La Roue de Fortune", num: "X", symbol: "🎡", icon: "🌟", meaningPast: "Des cycles de changements soudains ont bousculé vos habitudes.", meaningPresent: "Le vent tourne en votre faveur. Saisissez les opportunités imprévues au vol.", meaningFuture: "Un tournant favorable s'annonce, propice à l'élévation et au renouveau." },
+            { name: "L'Étoile", num: "XVII", symbol: "✨", icon: "🌠", meaningPast: "Espoir, guérison et foi en l'avenir ont guidé vos pas après la tempête.", meaningPresent: "La sérénité vous habite. Vos projets bénéficient d'une protection bienveillante.", meaningFuture: "Réalisation des vœux et inspiration artistique ou spirituelle durable." },
+            { name: "Le Soleil", num: "XIX", symbol: "☀️", icon: "🌻", meaningPast: "Joie, clarté et succès éclatants ont illuminé vos expériences passées.", meaningPresent: "Rayonnement personnel, vitalité et relations chaleureuses au premier plan.", meaningFuture: "Épanouissement total, bonheur partagé et triomphe de la lumière." },
+            { name: "Le Monde", num: "XXI", symbol: "🌍", icon: "🏆", meaningPast: "Achèvement d'un grand cycle et accomplissement personnel remarquable.", meaningPresent: "Vous touchez au but. L'ouverture sur l'extérieur et la reconnaissance sont proches.", meaningFuture: "Succès universel, voyage, plénitude et intégration de toutes vos leçons de vie." }
+        ];
+
+        let currentSpread = [];
+        let flippedCount = 0;
+        let userQuery = "";
+
+        function setQuestion(text) {
+            document.getElementById('user-question').value = text;
+        }
+
+        function showMessage(msg) {
+            document.getElementById('medium-message').innerText = `"${msg}"`;
+        }
+
+        function startReading() {
+            const input = document.getElementById('user-question');
+            userQuery = input.value.trim();
+
+            if (!userQuery) {
+                showMessage("Veuillez formuler votre question pour que je puisse consulter les arcanes...");
+                input.focus();
+                return;
+            }
+
+            // Shuffle & pick 3 distinct cards
+            const shuffled = [...tarotCards].sort(() => 0.5 - Math.random());
+            currentSpread = shuffled.slice(0, 3);
+            flippedCount = 0;
+
+            // Populate cards hidden state
+            for (let i = 0; i < 3; i++) {
+                const card = currentSpread[i];
+                document.getElementById(`card-inner-${i}`).classList.remove('card-flipped');
+                document.getElementById(`card-num-${i}`).innerText = card.num;
+                document.getElementById(`card-symbol-${i}`).innerText = card.symbol;
+                document.getElementById(`card-icon-${i}`).innerText = card.icon;
+                document.getElementById(`card-name-${i}`).innerText = card.name;
+                document.getElementById(`card-tag-${i}`).innerText = i === 0 ? "Passé" : i === 1 ? "Présent" : "Futur";
+            }
+
+            // Hide interpretation & show spread section with hint
+            document.getElementById('interpretation-section').classList.add('hidden');
+            document.getElementById('flip-hint').classList.remove('hidden');
+            
+            showMessage("Les cartes sont en place. Cliquez sur chacune d'elles pour révéler leur secret.");
+            
+            // Scroll smoothly to spread
+            document.getElementById('spread-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function flipCard(index) {
+            const inner = document.getElementById(`card-inner-${index}`);
+            // Check if already flipped
+            if (!inner.classList.contains('card-flipped')) {
+                inner.classList.add('card-flipped');
+                flippedCount++;
+
+                if (flippedCount === 3) {
+                    document.getElementById('flip-hint').classList.add('hidden');
+                    generateInterpretation();
+                } else {
+                    showMessage(`Encore ${3 - flippedCount} carte(s) à révéler pour entendre la prophétie...`);
+                }
+            }
+        }
+
+        function generateInterpretation() {
+            showMessage("Toutes les cartes sont révélées. Voici la lecture complète de votre destinée.");
+
+            const pastCard = currentSpread[0];
+            const presentCard = currentSpread[1];
+            const futureCard = currentSpread[2];
+
+            document.getElementById('recap-question').innerText = userQuery;
+            document.getElementById('analysis-past').innerText = `Concernant votre question (« ${userQuery} »), votre passé récent montre l'influence de l'arcane ${pastCard.name} (${pastCard.symbol}). ${pastCard.meaningPast}`;
+            document.getElementById('analysis-present').innerText = `Dans l'instant présent, l'arcane ${presentCard.name} (${presentCard.symbol}) dicte vos énergies. ${presentCard.meaningPresent}`;
+            document.getElementById('analysis-future').innerText = `Vers quoi vous dirigez-vous ? L'arcane ${futureCard.name} (${futureCard.symbol}) se profile en guide suprême. ${futureCard.meaningFuture}`;
+            
+            document.getElementById('analysis-synth').innerText = `« Les forces combinées de ${pastCard.name}, ${presentCard.name} et ${futureCard.name} indiquent une période charnière. Ayez confiance en votre intuition : le chemin s'éclaire pour répondre à votre quête. »`;
+
+            const interpSection = document.getElementById('interpretation-section');
+            interpSection.classList.remove('hidden');
+            interpSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetReading() {
+            document.getElementById('user-question').value = "";
+            document.getElementById('interpretation-section').classList.add('hidden');
+            document.getElementById('flip-hint').classList.add('hidden');
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`card-inner-${i}`).classList.remove('card-flipped');
+            }
+            showMessage("Pose ta question en ton âme et conscience. Les voiles du temps vont s'ouvrir pour révéler ton passé, ton présent et ton avenir...");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
